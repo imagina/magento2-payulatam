@@ -1,0 +1,15 @@
+<?php
+/**
+ * @copyright Copyright (c) 2015 Orba Sp. z o.o. (http://orba.pl)
+ */
+?>
+<form action="https://gateway.payulatam.com/ppp-web-gateway/" method="POST" name="payform">
+    <?php foreach ($this->getOrderCreateData() as $name => $value): ?>
+    <input type="hidden" name="<?php echo $name; ?>" value="<?php echo $value; ?>" />
+    <?php endforeach; ?>
+</form>
+<script language="JavaScript" type="text/javascript">
+    <!--
+    document.forms['payform'].submit();
+    -->
+</script>

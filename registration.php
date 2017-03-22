@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2015 Orba Sp. z o.o. (http://orba.pl)
+ * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
  */
 
 \Magento\Framework\Component\ComponentRegistrar::register(

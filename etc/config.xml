@@ -8,7 +8,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
         <payment>
-            <imagina_payulatam>
+            <payulatam>
                 <active>1</active>
                 <title>Payu Latam</title>
 
@@ -19,7 +19,7 @@
                 <model>Imagina\Payulatam\Model\Payulatam</model>
                 <allowspecific>0</allowspecific>
 
-            </imagina_payulatam>
+            </payulatam>
         </payment>
     </default>
 </config>

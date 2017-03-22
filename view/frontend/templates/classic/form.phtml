@@ -1,9 +1,9 @@
 <?php
 /**
- * @copyright Copyright (c) 2015 Orba Sp. z o.o. (http://orba.pl)
+ * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
  */
 ?>
-<form action="https://gateway.payulatam.com/ppp-web-gateway/" method="POST" name="payform">
+<form action="<?php echo $this->getGatewayUrl() ?>" method="POST" name="payform">
     <?php foreach ($this->getOrderCreateData() as $name => $value): ?>
     <input type="hidden" name="<?php echo $name; ?>" value="<?php echo $value; ?>" />
     <?php endforeach; ?>

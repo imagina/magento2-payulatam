@@ -22,4 +22,12 @@ PayuLatam integration for Magento 2
 
 The configuration can be found in Stores > Configuration > Sales > Payment Methods > Imagina PayuLatam. It should be pretty straight-forward.
 
+## How to Install
+From the command line in magento root:
+```ssh
+composer require imagina/magento2-payulatam
+php bin/magento setup:upgrade
+php bin/magento setup:di:compile
+```
+
 More Information:  https://www.imaginacolombia.com

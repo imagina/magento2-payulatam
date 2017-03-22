@@ -25,4 +25,12 @@ Reemplace "sudominio" con la direccion de su tienda. Ej. "tienda.com/payulatam/p
 
 La configuración puede encontrarse en "Stores > Configuration > Sales > Payment Methods > Imagina PayuLatam."
 
+## Como instalar
+Desde la linea de comandos en la raiz de magento:
+```ssh
+composer require imagina/magento2-payulatam
+php bin/magento setup:upgrade
+php bin/magento setup:di:compile
+```
+
 Mas información:  https://www.imaginacolombia.com

@@ -33,19 +33,19 @@ class Service
     }
 
     /**
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @param string $status
      * @param bool $close
      * @throws LocalizedException
      */
-    public function updateStatus($payuplOrderId, $status, $close = false)
+    public function updateStatus($payulatamOrderId, $status, $close = false)
     {
         /**
          * @var $transaction \Magento\Sales\Model\Order\Payment\Transaction
          */
-        $id = $this->transactionResource->getIdByPayuplOrderId($payuplOrderId);
+        $id = $this->transactionResource->getIdByPayuplOrderId($payulatamOrderId);
         if (!$id) {
-            throw new LocalizedException(new Phrase('Transaction ' . $payuplOrderId . ' not found.'));
+            throw new LocalizedException(new Phrase('Transaction ' . $payulatamOrderId . ' not found.'));
         }
         $transaction = $this->transactionRepository->get($id);
         if ($close) {

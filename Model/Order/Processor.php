@@ -33,70 +33,70 @@ class Processor
     }
 
     /**
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @param string$status
      * @param bool $close
      * @throws LocalizedException
      */
-    public function processOld($payuplOrderId, $status, $close = false)
+    public function processOld($payulatamOrderId, $status, $close = false)
     {
-        $this->transactionService->updateStatus($payuplOrderId, $status, $close);
+        $this->transactionService->updateStatus($payulatamOrderId, $status, $close);
     }
 
     /**
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @param string $status
      * @throws LocalizedException
      */
-    public function processPending($payuplOrderId, $status)
+    public function processPending($payulatamOrderId, $status)
     {
-        $this->transactionService->updateStatus($payuplOrderId, $status);
+        $this->transactionService->updateStatus($payulatamOrderId, $status);
     }
 
     /**
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @param string $status
      * @throws LocalizedException
      */
-    public function processHolded($payuplOrderId, $status)
+    public function processHolded($payulatamOrderId, $status)
     {
-        $order = $this->loadOrderByPayuplOrderId($payuplOrderId);
+        $order = $this->loadOrderByPayuplOrderId($payulatamOrderId);
         $this->orderHelper->setHoldedOrderStatus($order, $status);
-        $this->transactionService->updateStatus($payuplOrderId, $status, true);
+        $this->transactionService->updateStatus($payulatamOrderId, $status, true);
     }
 
     /**
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @param string $status
      * @throws LocalizedException
      * @todo Implement some additional logic for transaction confirmation by store owner.
      */
-    public function processWaiting($payuplOrderId, $status)
+    public function processWaiting($payulatamOrderId, $status)
     {
-        $this->transactionService->updateStatus($payuplOrderId, $status);
+        $this->transactionService->updateStatus($payulatamOrderId, $status);
     }
 
     /**
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @param string $status
      * @param float $amount
      * @throws LocalizedException
      */
-    public function processCompleted($payuplOrderId, $status, $amount)
+    public function processCompleted($payulatamOrderId, $status, $amount)
     {
-        $order = $this->loadOrderByPayuplOrderId($payuplOrderId);
-        $this->orderHelper->completePayment($order, $amount, $payuplOrderId);
-        $this->transactionService->updateStatus($payuplOrderId, $status, true);
+        $order = $this->loadOrderByPayuplOrderId($payulatamOrderId);
+        $this->orderHelper->completePayment($order, $amount, $payulatamOrderId);
+        $this->transactionService->updateStatus($payulatamOrderId, $status, true);
     }
 
     /**
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @return \Imagina\Payulatam\Model\Sales\Order
      * @throws LocalizedException
      */
-    protected function loadOrderByPayuplOrderId($payuplOrderId)
+    protected function loadOrderByPayuplOrderId($payulatamOrderId)
     {
-        $order = $this->orderHelper->loadOrderByPayuplOrderId($payuplOrderId);
+        $order = $this->orderHelper->loadOrderByPayuplOrderId($payulatamOrderId);
         if (!$order) {
             throw new LocalizedException(new Phrase('Order not found.'));
         }

@@ -107,17 +107,17 @@ class Order implements OrderInterface
     /**
      * @inheritdoc
      */
-    public function validateRetrieve($payuplOrderId)
+    public function validateRetrieve($payulatamOrderId)
     {
-        return $this->dataValidator->validateEmpty($payuplOrderId);
+        return $this->dataValidator->validateEmpty($payulatamOrderId);
     }
 
     /**
      * @inheritdoc
      */
-    public function validateCancel($payuplOrderId)
+    public function validateCancel($payulatamOrderId)
     {
-        return $this->dataValidator->validateEmpty($payuplOrderId);
+        return $this->dataValidator->validateEmpty($payulatamOrderId);
     }
 
     /**
@@ -166,9 +166,9 @@ class Order implements OrderInterface
     /**
      * @inheritdoc
      */
-    public function retrieve($payuplOrderId)
+    public function retrieve($payulatamOrderId)
     {
-        $response = $this->methodCaller->call('orderRetrieve', [$payuplOrderId]);
+        $response = $this->methodCaller->call('orderRetrieve', [$payulatamOrderId]);
         if ($response) {
             return [
                 'status' => $response->orders[0]->status,
@@ -181,9 +181,9 @@ class Order implements OrderInterface
     /**
      * @inheritdoc
      */
-    public function cancel($payuplOrderId)
+    public function cancel($payulatamOrderId)
     {
-        return (bool) ($this->methodCaller->call('orderCancel', [$payuplOrderId]));
+        return (bool) ($this->methodCaller->call('orderCancel', [$payulatamOrderId]));
     }
 
     /**
@@ -205,7 +205,7 @@ class Order implements OrderInterface
         $response = $this->methodCaller->call('orderConsumeNotification', [$request->getContent()]);
         if ($response) {
             return [
-                'payuplOrderId' => $response->order->orderId,
+                'payulatamOrderId' => $response->order->orderId,
                 'status' => $response->order->status,
                 'amount' => (float) $response->order->totalAmount / 100
             ];
@@ -250,10 +250,10 @@ class Order implements OrderInterface
     /**
      * @inheritdoc
      */
-    public function canProcessNotification($payuplOrderId)
+    public function canProcessNotification($payulatamOrderId)
     {
         return !in_array(
-            $this->transactionResource->getStatusByPayuplOrderId($payuplOrderId),
+            $this->transactionResource->getStatusByPayuplOrderId($payulatamOrderId),
             [self::STATUS_COMPLETED, self::STATUS_CANCELLED]
         );
     }
@@ -261,13 +261,13 @@ class Order implements OrderInterface
     /**
      * @inheritdoc
      */
-    public function processNotification($payuplOrderId, $status, $amount)
+    public function processNotification($payulatamOrderId, $status, $amount)
     {
         /**
          * @var $result \Magento\Framework\Controller\Result\Raw
          */
-        $newest = $this->transactionResource->checkIfNewestByPayuplOrderId($payuplOrderId);
-        $this->orderProcessor->processStatusChange($payuplOrderId, $status, $amount, $newest);
+        $newest = $this->transactionResource->checkIfNewestByPayuplOrderId($payulatamOrderId);
+        $this->orderProcessor->processStatusChange($payulatamOrderId, $status, $amount, $newest);
         $result = $this->rawResultFactory->create();
         $result->setHttpResponseCode(200);
         return $result;

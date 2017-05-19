@@ -58,16 +58,16 @@ class Client
     }
 
     /**
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @return string Transaction status
      * @throws LocalizedException
      */
-    public function orderRetrieve($payuplOrderId)
+    public function orderRetrieve($payulatamOrderId)
     {
-        if (!$this->orderHelper->validateRetrieve($payuplOrderId)) {
+        if (!$this->orderHelper->validateRetrieve($payulatamOrderId)) {
             throw new LocalizedException(new Phrase('ID of order to retrieve is empty.'));
         }
-        $result = $this->orderHelper->retrieve($payuplOrderId);
+        $result = $this->orderHelper->retrieve($payulatamOrderId);
         if (!$result) {
             throw new LocalizedException(new Phrase('There was a problem while processing order retrieve request.'));
         }
@@ -75,16 +75,16 @@ class Client
     }
 
     /**
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @return bool|\OpenPayU_Result
      * @throws LocalizedException
      */
-    public function orderCancel($payuplOrderId)
+    public function orderCancel($payulatamOrderId)
     {
-        if (!$this->orderHelper->validateCancel($payuplOrderId)) {
+        if (!$this->orderHelper->validateCancel($payulatamOrderId)) {
             throw new LocalizedException(new Phrase('ID of order to cancel is empty.'));
         }
-        $result = $this->orderHelper->cancel($payuplOrderId);
+        $result = $this->orderHelper->cancel($payulatamOrderId);
         if (!$result) {
             throw new LocalizedException(new Phrase('There was a problem while processing order cancel request.'));
         }
@@ -112,7 +112,7 @@ class Client
 
     /**
      * @param \Magento\Framework\App\Request\Http $request
-     * @return array (keys: payuplOrderId, status, amount)
+     * @return array (keys: payulatamOrderId, status, amount)
      * @throws LocalizedException
      */
     public function orderConsumeNotification(\Magento\Framework\App\Request\Http $request)

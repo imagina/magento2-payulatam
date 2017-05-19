@@ -54,10 +54,10 @@ class Transaction extends AbstractDb
     }
 
     /**
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @return bool
      */
-    public function checkIfNewestByPayuplOrderId($payuplOrderId)
+    public function checkIfNewestByPayuplOrderId($payulatamOrderId)
     {
         $transactionTableName = $this->_resources->getTableName('sales_payment_transaction');
         $adapter = $this->getConnection();
@@ -69,7 +69,7 @@ class Transaction extends AbstractDb
                 ['t2' => $transactionTableName],
                 't2.order_id = main_table.order_id AND t2.transaction_id > main_table.transaction_id',
                 ['newer_id' => 't2.transaction_id']
-            )->where('main_table.txn_id = ?', $payuplOrderId)
+            )->where('main_table.txn_id = ?', $payulatamOrderId)
             ->limit(1);
         $row = $adapter->fetchRow($select);
         if ($row && is_null($row['newer_id'])) {
@@ -79,21 +79,21 @@ class Transaction extends AbstractDb
     }
 
     /**
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @return int|false
      */
-    public function getOrderIdByPayuplOrderId($payuplOrderId)
+    public function getOrderIdByPayuplOrderId($payulatamOrderId)
     {
-        return $this->getOneFieldByAnother('order_id', 'txn_id', $payuplOrderId);
+        return $this->getOneFieldByAnother('order_id', 'txn_id', $payulatamOrderId);
     }
 
     /**
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @return string|false
      */
-    public function getStatusByPayuplOrderId($payuplOrderId)
+    public function getStatusByPayuplOrderId($payulatamOrderId)
     {
-        return $this->getAdditionalDataByPayuplOrderId($payuplOrderId, 'status');
+        return $this->getAdditionalDataByPayuplOrderId($payulatamOrderId, 'status');
     }
 
     /**
@@ -106,21 +106,21 @@ class Transaction extends AbstractDb
     }
 
     /**
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @return string|false
      */
-    public function getExtOrderIdByPayuplOrderId($payuplOrderId)
+    public function getExtOrderIdByPayuplOrderId($payulatamOrderId)
     {
-        return $this->getAdditionalDataByPayuplOrderId($payuplOrderId, 'order_id');
+        return $this->getAdditionalDataByPayuplOrderId($payulatamOrderId, 'order_id');
     }
 
     /**
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @return int|false
      */
-    public function getIdByPayuplOrderId($payuplOrderId)
+    public function getIdByPayuplOrderId($payulatamOrderId)
     {
-        return $this->getOneFieldByAnother('transaction_id', 'txn_id', $payuplOrderId);
+        return $this->getOneFieldByAnother('transaction_id', 'txn_id', $payulatamOrderId);
     }
 
     /**
@@ -160,16 +160,16 @@ class Transaction extends AbstractDb
     }
 
     /**
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @param string $field
      * @return mixed
      */
-    protected function getAdditionalDataByPayuplOrderId($payuplOrderId, $field)
+    protected function getAdditionalDataByPayuplOrderId($payulatamOrderId, $field)
     {
         $serializedAdditionalInformation = $this->getOneFieldByAnother(
             'additional_information',
             'txn_id',
-            $payuplOrderId
+            $payulatamOrderId
         );
         if ($serializedAdditionalInformation) {
             $additionalInformation = unserialize($serializedAdditionalInformation);

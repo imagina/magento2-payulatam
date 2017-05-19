@@ -65,20 +65,20 @@ class Order
      * Saves new order transaction incrementing "try".
      *
      * @param \Magento\Sales\Model\Order $order
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @param string $payuplExternalOrderId
      * @param string $status
      */
     public function addNewOrderTransaction(
         \Magento\Sales\Model\Order $order,
-        $payuplOrderId,
+        $payulatamOrderId,
         $payuplExternalOrderId,
         $status
     ) {
 
         $orderId = $order->getId();
         $payment = $order->getPayment();
-        $payment->setTransactionId($payuplOrderId);
+        $payment->setTransactionId($payulatamOrderId);
         $payment->setTransactionAdditionalInfo(\Magento\Sales\Model\Order\Payment\Transaction::RAW_DETAILS, [
             'order_id' => $payuplExternalOrderId,
             'try' => $this->transactionResource->getLastTryByOrderId($orderId) + 1,
@@ -108,12 +108,12 @@ class Order
     }
 
     /**
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @return Sales\Order|false
      */
-    public function loadOrderByPayuplOrderId($payuplOrderId)
+    public function loadOrderByPayuplOrderId($payulatamOrderId)
     {
-        $orderId = $this->transactionResource->getOrderIdByPayuplOrderId($payuplOrderId);
+        $orderId = $this->transactionResource->getOrderIdByPayuplOrderId($payulatamOrderId);
         if ($orderId) {
             return $this->loadOrderById($orderId);
         }
@@ -144,7 +144,7 @@ class Order
             ->setHoldBeforeStatus($order->getStatus())
             ->setState($orderState)
             ->setStatus($orderStatus);
-        $order->addStatusHistoryComment(__('Payu.pl status') . ': ' . $status);
+        $order->addStatusHistoryComment(__('Payulatam status') . ': ' . $status);
         $order->save();
     }
 
@@ -154,12 +154,12 @@ class Order
      * @param Sales\Order $order
      * @param float $amount
      */
-    public function completePayment(Sales\Order $order, $amount, $payuplOrderId)
+    public function completePayment(Sales\Order $order, $amount, $payulatamOrderId)
     {
         $payment = $order->getPayment();
         $payment
-            ->setParentTransactionId($payuplOrderId)
-            ->setTransactionId($payuplOrderId . ':C')
+            ->setParentTransactionId($payulatamOrderId)
+            ->setTransactionId($payulatamOrderId . ':C')
             ->registerCaptureNotification($amount)
             ->save();
         foreach ($order->getRelatedObjects() as $object) {
@@ -187,8 +187,8 @@ class Order
      * Checks if first payment can be started.
      *
      * Order should belong to current logged in customer.
-     * Order should have Payu.pl payment method.
-     * Order should have no Payu.pl transactions.
+     * Order should have PayuLatam payment method.
+     * Order should have no PayuLatam transactions.
      * Order shouldn't be cancelled, closed or completed.
      *
      * @param \Magento\Sales\Model\Order $order

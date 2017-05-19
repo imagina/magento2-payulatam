@@ -23,14 +23,14 @@ class Processor
     }
 
     /**
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @param string $status
      * @param float $amount
      * @param bool $newest
      * @return bool
      * @throws LocalizedException
      */
-    public function processStatusChange($payuplOrderId, $status = '', $amount = null, $newest = true)
+    public function processStatusChange($payulatamOrderId, $status = '', $amount = null, $newest = true)
     {
         if (!in_array($status, [
             Order::STATUS_NEW,
@@ -51,25 +51,25 @@ class Processor
                 Order::STATUS_REJECTED,
                 Order::STATUS_COMPLETED
             ]);
-            $this->orderProcessor->processOld($payuplOrderId, $status, $close);
+            $this->orderProcessor->processOld($payulatamOrderId, $status, $close);
             return true;
         }
         switch ($status) {
             case Order::STATUS_NEW:
             case Order::STATUS_PENDING:
-                $this->orderProcessor->processPending($payuplOrderId, $status);
+                $this->orderProcessor->processPending($payulatamOrderId, $status);
                 return true;
             case Order::STATUS_CANCELLED:
             case Order::STATUS_REJECTED:
             case Order::STATUS_REJECTED_CANCELLED:
             case Order::STATUS_ERROR:
-                $this->orderProcessor->processHolded($payuplOrderId, $status);
+                $this->orderProcessor->processHolded($payulatamOrderId, $status);
                 return true;
             case Order::STATUS_WAITING:
-                $this->orderProcessor->processWaiting($payuplOrderId, $status);
+                $this->orderProcessor->processWaiting($payulatamOrderId, $status);
                 return true;
             case Order::STATUS_COMPLETED:
-                $this->orderProcessor->processCompleted($payuplOrderId, $status, $amount);
+                $this->orderProcessor->processCompleted($payulatamOrderId, $status, $amount);
                 return true;
         }
     }

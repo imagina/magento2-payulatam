@@ -139,17 +139,17 @@ class Order implements \Imagina\Payulatam\Model\Client\OrderInterface
     /**
      * @inheritDoc
      */
-    public function validateRetrieve($payuplOrderId)
+    public function validateRetrieve($payulatamOrderId)
     {
-        return $this->dataValidator->validateEmpty($payuplOrderId);
+        return $this->dataValidator->validateEmpty($payulatamOrderId);
     }
 
     /**
      * @inheritDoc
      */
-    public function validateCancel($payuplOrderId)
+    public function validateCancel($payulatamOrderId)
     {
-        return $this->dataValidator->validateEmpty($payuplOrderId);
+        return $this->dataValidator->validateEmpty($payulatamOrderId);
     }
 
     /**
@@ -176,18 +176,18 @@ class Order implements \Imagina\Payulatam\Model\Client\OrderInterface
     /**
      * @inheritDoc
      */
-    public function retrieve($payuplOrderId)
+    public function retrieve($payulatamOrderId)
     {
         $posId = $this->dataGetter->getPosId();
         $ts = $this->dataGetter->getTs();
         $sig = $this->dataGetter->getSigForOrderRetrieve([
             'pos_id' => $posId,
-            'referenceCode' => $payuplOrderId,
+            'referenceCode' => $payulatamOrderId,
             'ts' => $ts
         ]);
         $result = $this->methodCaller->call('orderRetrieve', [
             $posId,
-            $payuplOrderId,
+            $payulatamOrderId,
             $ts,
             $sig
         ]);
@@ -203,7 +203,7 @@ class Order implements \Imagina\Payulatam\Model\Client\OrderInterface
     /**
      * @inheritDoc
      */
-    public function cancel($payuplOrderId)
+    public function cancel($payulatamOrderId)
     {
         // TODO: Implement cancel() method.
     }
@@ -221,11 +221,11 @@ class Order implements \Imagina\Payulatam\Model\Client\OrderInterface
      */
     public function consumeNotification(\Magento\Framework\App\Request\Http $request)
     {
-        $payuplOrderId = $this->notificationHelper->getPayuplOrderId($request);
-        $orderData = $this->retrieve($payuplOrderId);
+        $payulatamOrderId = $this->notificationHelper->getPayuplOrderId($request);
+        $orderData = $this->retrieve($payulatamOrderId);
         if ($orderData) {
             return [
-                'payuplOrderId' => md5($payuplOrderId),
+                'payulatamOrderId' => md5($payulatamOrderId),
                 'status' => $orderData['status'],
                 'amount' => $orderData['amount']
             ];
@@ -277,10 +277,10 @@ class Order implements \Imagina\Payulatam\Model\Client\OrderInterface
     /**
      * @inheritDoc
      */
-    public function canProcessNotification($payuplOrderId)
+    public function canProcessNotification($payulatamOrderId)
     {
         return !in_array(
-            $this->transactionResource->getStatusByPayuplOrderId($payuplOrderId),
+            $this->transactionResource->getStatusByPayuplOrderId($payulatamOrderId),
             [self::STATUS_COMPLETED, self::STATUS_CANCELLED]
         );
     }
@@ -288,13 +288,13 @@ class Order implements \Imagina\Payulatam\Model\Client\OrderInterface
     /**
      * @inheritDoc
      */
-    public function processNotification($payuplOrderId, $status, $amount)
+    public function processNotification($payulatamOrderId, $status, $amount)
     {
         /**
          * @var $result \Magento\Framework\Controller\Result\Raw
          */
-        $newest = $this->transactionResource->checkIfNewestByPayuplOrderId($payuplOrderId);
-        $this->orderProcessor->processStatusChange($payuplOrderId, $status, $amount, $newest);
+        $newest = $this->transactionResource->checkIfNewestByPayuplOrderId($payulatamOrderId);
+        $this->orderProcessor->processStatusChange($payulatamOrderId, $status, $amount, $newest);
         $result = $this->rawResultFactory->create();
         $result
             ->setHttpResponseCode(200)

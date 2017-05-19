@@ -33,7 +33,7 @@ class Config extends \Magento\Sales\Model\Order\Config
     }
 
     /**
-     * Gets Payu.pl-specific default status for state.
+     * Gets PayuLatam-specific default status for state.
      *
      * @param string $state
      * @return string

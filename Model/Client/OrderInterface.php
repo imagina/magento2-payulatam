@@ -44,18 +44,18 @@ interface OrderInterface
     /**
      * Return false on fail or array with the following keys: status, amount on success.
      *
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @return array|false
      */
-    public function retrieve($payuplOrderId);
+    public function retrieve($payulatamOrderId);
 
     /**
      * Return false on fail or true success.
      *
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @return bool
      */
-    public function cancel($payuplOrderId);
+    public function cancel($payulatamOrderId);
 
     /**
      * Return false on fail or true success.
@@ -66,7 +66,7 @@ interface OrderInterface
     public function statusUpdate(array $data = []);
 
     /**
-     * Returns false on fail or array with the following keys on success: payuplOrderId, status, amount
+     * Returns false on fail or array with the following keys on success: payulatamOrderId, status, amount
      *
      * @param \Magento\Framework\App\Request\Http $request
      * @return array|false
@@ -100,19 +100,19 @@ interface OrderInterface
     public function paymentSuccessCheck();
 
     /**
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @return bool
      */
-    public function canProcessNotification($payuplOrderId);
+    public function canProcessNotification($payulatamOrderId);
 
     /**
-     * @param string $payuplOrderId
+     * @param string $payulatamOrderId
      * @param string $status
      * @param float $amount
      * @return \Magento\Framework\Controller\Result\Raw
      * @throws LocalizedException
      */
-    public function processNotification($payuplOrderId, $status, $amount);
+    public function processNotification($payulatamOrderId, $status, $amount);
 
     /**
      * @param mixed $status

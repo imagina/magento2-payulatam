@@ -3,10 +3,10 @@
   "description": "PayuLatam integration for Magento 2",
   "require": {
     "php": ">=7.0.0",
-    "magento/module-checkout": "100.1.*",
-    "magento/module-payment": "100.1.*",
-    "magento/module-sales": "100.1.*",
-    "magento/framework": "100.1.*"
+    "magento/module-checkout": "100.*",
+    "magento/module-payment": "100.*",
+    "magento/module-sales": "100.*",
+    "magento/framework": "100.*"
   },
   "type": "magento2-module",
   "version": "0.0.1",

@@ -39,10 +39,10 @@ class Repeat extends \Magento\Framework\App\Action\Action
         $payulatamOrderId = $this->context->getRequest()->getParam('id');
         $orderId = $this->paymentHelper->getOrderIdIfCanRepeat($payulatamOrderId);
         if ($orderId) {
-            $resultRedirect->setPath('orba_payupl/payment/repeat_start');
+            $resultRedirect->setPath('payulatam/payment/repeat_start');
             $this->session->setLastOrderId($orderId);
         } else {
-            $resultRedirect->setPath('orba_payupl/payment/repeat_error');
+            $resultRedirect->setPath('payulatam/payment/repeat_error');
             $this->messageManager->addError(__('The repeat payment link is invalid.'));
         }
         return $resultRedirect;

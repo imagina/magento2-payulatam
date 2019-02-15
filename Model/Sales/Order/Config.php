@@ -9,9 +9,9 @@ use Imagina\Payulatam\Model\Sales\Order;
 
 class Config extends \Magento\Sales\Model\Order\Config
 {
-    const XML_PATH_ORDER_STATUS_NEW         = 'payment/orba_payupl/order_status_new';
-    const XML_PATH_ORDER_STATUS_HOLDED      = 'payment/orba_payupl/order_status_holded';
-    const XML_PATH_ORDER_STATUS_PROCESSING  = 'payment/orba_payupl/order_status_processing';
+    const XML_PATH_ORDER_STATUS_NEW         = 'payment/payulatam/order_status_new';
+    const XML_PATH_ORDER_STATUS_HOLDED      = 'payment/payulatam/order_status_holded';
+    const XML_PATH_ORDER_STATUS_PROCESSING  = 'payment/payulatam/order_status_processing';
 
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface

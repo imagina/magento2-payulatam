@@ -246,9 +246,17 @@ class Order implements \Imagina\Payulatam\Model\Client\OrderInterface
      */
     public function addSpecialDataToOrder(array $data = [])
     {
-        $data['merchantId'] = $this->dataGetter->getMerchantId();
-        $data['accountId'] = $this->dataGetter->getAccountId();
-        $data['signature'] = $this->dataGetter->getSigForOrderCreate($data);
+        if ($this->dataGetter->getTestMode() == 0) {
+            $data['merchantId'] = $this->dataGetter->getMerchantId();
+            $data['accountId'] = $this->dataGetter->getAccountId();
+            $data['signature'] = $this->dataGetter->getSigForOrderCreate($data);
+        } else {
+            $data['merchantId'] = '508029';
+            // TODO change accountID depending on country
+            $data['accountId'] = '512321';
+            $data['ApiKey'] = 'pRRXKOl8ikMmt9u';
+            $data['ApiLogin'] = '4Vj8eK4rloUd272L48hsrarnUA';
+        }
         return $data;
     }
 

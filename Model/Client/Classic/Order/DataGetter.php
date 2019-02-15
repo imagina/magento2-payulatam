@@ -68,7 +68,7 @@ class DataGetter
             'currency' => $order->getOrderCurrencyCode(),
             'tax' => number_format($order->getTaxAmount(),2,'.',''),
             'taxReturnBase' => $taxReturnBase,
-            // TODO Enable this two lines only en test-mode
+            // TODO Contruct url with modules
             'responseUrl' => 'https://dev.palpet.co/payulatam/payment/end',
             'confirmationUrl' => 'https://dev.palpet.co/payulatam/payment/notify'
         ];

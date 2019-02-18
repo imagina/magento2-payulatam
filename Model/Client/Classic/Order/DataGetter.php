@@ -37,12 +37,14 @@ class DataGetter
         \Imagina\Payulatam\Model\Order\ExtOrderId $extOrderIdHelper,
         \Imagina\Payulatam\Model\Client\Classic\Config $configHelper,
         \Magento\Framework\Stdlib\DateTime\DateTime $dateTime,
-        \Imagina\Payulatam\Model\Session $session
+        \Imagina\Payulatam\Model\Session $session,
+        \Magento\Store\Model\StoreManagerInterface $storeManager
     ) {
         $this->extOrderIdHelper = $extOrderIdHelper;
         $this->configHelper = $configHelper;
         $this->dateTime = $dateTime;
         $this->session = $session;
+        $this->storeManager = $storeManager;
     }
 
     /**
@@ -68,6 +70,11 @@ class DataGetter
             'currency' => $order->getOrderCurrencyCode(),
             'tax' => number_format($order->getTaxAmount(),2,'.',''),
             'taxReturnBase' => $taxReturnBase,
+            // TODO Contruct url with modules
+            // 'responseUrl' => 'https://dev.palpet.co/payulatam/payment/end',
+            'responseUrl' => $this->storeManager->getstore()->getBaseUrl(),
+            'confirmationUrl' => $this->storeManager->getstore()->getUrl('payulatam/payment/notify')
+            // 'confirmationUrl' => 'https://dev.palpet.co/payulatam/payment/notify'
         ];
 
         return $data;

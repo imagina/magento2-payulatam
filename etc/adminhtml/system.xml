@@ -74,11 +74,29 @@
                     </depends>
                 </field>
 
+<<<<<<< HEAD
         <field id="country" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Country</label>
             <comment>Select country for Payulatam</comment>
             <source_model>Imagina\Payulatam\Model\Source\Country</source_model>
          </field>
+=======
+                <field name="title">
+                    <argument name="data" xsi:type="array">
+                        <item name="config" xsi:type="array">
+                            <item name="label" xsi:type="string">Country:</item>
+                            <item name="visible" xsi:type="boolean">true</item>
+                            <item name="dataType" xsi:type="string">text</item>
+                            <item name="formElement" xsi:type="string">input</item>
+                            <item name="source" xsi:type="string">Imagina\Payulatam\Model\Source\Country</item>
+                            <item name="validation" xsi:type="array">
+                                <item name="required-entry" xsi:type="boolean">true</item>
+                            </item>
+                        </item>
+                    </argument>
+         </field>
+
+>>>>>>> 102d1cf5ad7fccc0ddf137a40811646a68d670c0
                 <!-- <field id="allowspecific" translate="label" type="allowspecific" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1"> -->
                 <!--     <label>Payment from Applicable Countries</label> -->
                 <!--     <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model> -->
@@ -95,7 +113,11 @@
                 <!--         <field id="active">1</field> -->
                 <!--     </depends> -->
                 <!-- </field> -->
+<<<<<<< HEAD
 
+=======
+                <!--  -->
+>>>>>>> 102d1cf5ad7fccc0ddf137a40811646a68d670c0
 
                 <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Sort Order</label>

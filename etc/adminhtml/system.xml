@@ -73,6 +73,7 @@
                         <field id="active">1</field>
                     </depends>
                 </field>
+
                 <field name="title">
                     <argument name="data" xsi:type="array">
                         <item name="config" xsi:type="array">

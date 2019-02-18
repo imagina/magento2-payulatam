@@ -1,4 +1,4 @@
-<!-- namespace Imagina\Payulatam\Model\Source -->
+namespace Imagina\Payulatam\Model\Source
 
 class Country implements \Magento\Framework\Option\ArrayInterface
 {

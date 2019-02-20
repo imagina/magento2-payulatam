@@ -1,26 +1,23 @@
 <?php
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
 
-namespace Imagina\Payulatam\Block\Payment\Repeat;
+namespace Icyd\Payulatam\Block\Payment\Repeat;
 
 class Fail extends \Magento\Framework\View\Element\Template
 {
     /**
-     * @var \Imagina\Payulatam\Helper\Payment
+     * @var \Icyd\Payulatam\Helper\Payment
      */
     protected $paymentHelper;
 
     /**
-     * @var \Imagina\Payulatam\Model\Session
+     * @var \Icyd\Payulatam\Model\Session
      */
     protected $session;
 
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
-        \Imagina\Payulatam\Model\Session $session,
-        \Imagina\Payulatam\Helper\Payment $paymentHelper,
+        \Icyd\Payulatam\Model\Session $session,
+        \Icyd\Payulatam\Helper\Payment $paymentHelper,
         array $data = []
     ) {
         parent::__construct(

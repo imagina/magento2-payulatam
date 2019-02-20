@@ -18,7 +18,7 @@ define(
         return Component.extend({
             defaults: {
                 redirectAfterPlaceOrder: false,
-                template: 'Imagina_Payulatam/payment/payulatam'
+                template: 'Icyd_Payulatam/payment/payulatam'
             },
 
             getData: function() {

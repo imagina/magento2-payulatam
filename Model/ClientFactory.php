@@ -1,9 +1,6 @@
 <?php
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
 
-namespace Imagina\Payulatam\Model;
+namespace Icyd\Payulatam\Model;
 
 class ClientFactory
 {
@@ -35,7 +32,7 @@ class ClientFactory
     public function create(array $data = [])
     {
         //Here we could select what kind of integration. Right now we only have "webcheckout". http://developers.payulatam.com/en/web_checkout/integration.html
-        $class = Client\Classic::class;
+        $class = Client\Webcheckout::class;
 
         return $this->objectManager->create($class, []);
     }

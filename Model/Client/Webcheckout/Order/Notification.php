@@ -1,9 +1,6 @@
 <?php
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
 
-namespace Imagina\Payulatam\Model\Client\Classic\Order;
+namespace Icyd\Payulatam\Model\Client\Webcheckout\Order;
 
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Phrase;
@@ -11,15 +8,15 @@ use Magento\Framework\Phrase;
 class Notification
 {
     /**
-     * @var \Imagina\Payulatam\Model\Client\Classic\Config
+     * @var \Icyd\Payulatam\Model\Client\Webcheckout\Config
      */
     protected $configHelper;
 
     /**
-     * @param \Imagina\Payulatam\Model\Client\Classic\Config $configHelper
+     * @param \Icyd\Payulatam\Model\Client\Webcheckout\Config $configHelper
      */
     public function __construct(
-        \Imagina\Payulatam\Model\Client\Classic\Config $configHelper
+        \Icyd\Payulatam\Model\Client\Webcheckout\Config $configHelper
     ) {
         $this->configHelper = $configHelper;
     }

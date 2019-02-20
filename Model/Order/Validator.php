@@ -1,14 +1,11 @@
 <?php
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
 
-namespace Imagina\Payulatam\Model\Order;
+namespace Icyd\Payulatam\Model\Order;
 
 class Validator
 {
     /**
-     * @var \Imagina\Payulatam\Model\ResourceModel\Transaction
+     * @var \Icyd\Payulatam\Model\ResourceModel\Transaction
      */
     protected $transactionResource;
 
@@ -18,7 +15,7 @@ class Validator
     protected $customerSession;
 
     public function __construct(
-        \Imagina\Payulatam\Model\ResourceModel\Transaction $transactionResource,
+        \Icyd\Payulatam\Model\ResourceModel\Transaction $transactionResource,
         \Magento\Customer\Model\Session $customerSession
     ) {
         $this->transactionResource = $transactionResource;
@@ -40,7 +37,7 @@ class Validator
      */
     public function validatePaymentMethod(\Magento\Sales\Model\Order $order)
     {
-        return $order->getPayment()->getMethod() === \Imagina\Payulatam\Model\Payulatam::CODE;
+        return $order->getPayment()->getMethod() === \Icyd\Payulatam\Model\Payulatam::CODE;
     }
 
     /**

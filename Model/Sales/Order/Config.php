@@ -1,11 +1,8 @@
 <?php
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
 
-namespace Imagina\Payulatam\Model\Sales\Order;
+namespace Icyd\Payulatam\Model\Sales\Order;
 
-use Imagina\Payulatam\Model\Sales\Order;
+use Icyd\Payulatam\Model\Sales\Order;
 
 class Config extends \Magento\Sales\Model\Order\Config
 {

@@ -1,6 +1,6 @@
 {
-  "name": "imagina/magento2-payulatam",
-  "description": "PayuLatam integration for Magento 2",
+  "name": "icyd/magento2-payulatam",
+  "description": "PayuLatam module for Magento 2",
   "require": {
     "php": ">=7.0.0",
     "magento/module-checkout": ">=100",
@@ -15,13 +15,13 @@
       "registration.php"
     ],
     "psr-4": {
-      "Imagina\\Payulatam\\": ""
+      "Icyd\\Payulatam\\": ""
     }
   },
   "authors": [
     {
-      "name": "Imagina Colombia",
-      "homepage": "http://www.imaginacolombia.com/"
+      "name": "Alberto Vázquez",
+      "homepage": "https://github.com/icyd/magento2-payulatam"
     }
   ],
   "license": [

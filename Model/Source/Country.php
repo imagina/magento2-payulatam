@@ -1,27 +1,18 @@
-namespace Imagina\Payulatam\Model\Source
+<?php
+
+namespace Icyd\Payulatam\Model\Source;
 
 class Country implements \Magento\Framework\Option\ArrayInterface
 {
     public function toOptionArray()
     {
-        $result = [];
-
-        foreach (self::getOptionArray() as $index => $value) {
-            $result[] = ['value'  => $index, 'label' = $value];
-        }
-
-        return $result;
-    }
-
-    public static function getOptionArray()
-    {
         return [
-            ['value'  => '512322', 'label' => 'Argentina'],
-            ['value'  => '512321', 'label' => 'Colombia'],
-            ['value'  => '512324', 'label' => 'Mexico'],
-            ['value'  => '512326', 'label' => 'Panama'],
-            ['value'  => '512323', 'label' => 'Peru'],
-            ['value'  => '512327', 'label' => 'Brazil']
+            ['value'  => '512322', 'label' => __('Argentina')],
+            ['value'  => '512321', 'label' => __('Colombia')],
+            ['value'  => '512324', 'label' => __('Mexico')],
+            ['value'  => '512326', 'label' => __('Panama')],
+            ['value'  => '512323', 'label' => __('Peru')],
+            ['value'  => '512327', 'label' => __('Brazil')]
         ];
     }
 
@@ -36,3 +27,4 @@ class Country implements \Magento\Framework\Option\ArrayInterface
         return isset($options[$optionId]) ? $options[$optionId] : null;
     }
 }
+?>

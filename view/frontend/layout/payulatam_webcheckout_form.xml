@@ -1,13 +1,8 @@
 <?xml version="1.0"?>
-<!--
-/**
-* @copyright Copyright (c) 2017 Imagina. (https://www.imaginacolombia.com)
-*/
--->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="empty" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="root">
-            <block class="Magento\Framework\View\Element\Template" name="payulatam.classic.form" template="Imagina_Payulatam::classic/form.phtml" cacheable="false"/>
+            <block class="Magento\Framework\View\Element\Template" name="payulatam.webcheckout.form" template="Icyd_Payulatam::form.phtml" cacheable="false"/>
         </referenceContainer>
     </body>
 </page>

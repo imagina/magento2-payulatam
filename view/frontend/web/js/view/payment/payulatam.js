@@ -17,7 +17,7 @@ define(
         rendererList.push(
             {
                 type: 'payulatam',
-                component: 'Imagina_Payulatam/js/view/payment/method-renderer/payulatam-method'
+                component: 'Icyd_Payulatam/js/view/payment/method-renderer/payulatam-method'
             }
         );
         /** Add view logic here if needed */

@@ -1,9 +1,6 @@
 <?php
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
 
-namespace Imagina\Payulatam\Controller\Payment;
+namespace Icyd\Payulatam\Controller\Payment;
 
 use Magento\Framework\Exception\LocalizedException;
 
@@ -15,7 +12,7 @@ class Notify extends \Magento\Framework\App\Action\Action
     protected $context;
 
     /**
-     * @var \Imagina\Payulatam\Model\ClientFactory
+     * @var \Icyd\Payulatam\Model\ClientFactory
      */
     protected $clientFactory;
 
@@ -25,21 +22,21 @@ class Notify extends \Magento\Framework\App\Action\Action
     protected $resultForwardFactory;
 
     /**
-     * @var \Imagina\Payulatam\Logger\Logger
+     * @var \Icyd\Payulatam\Logger\Logger
      */
     protected $logger;
 
     /**
      * @param \Magento\Framework\App\Action\Context $context
-     * @param \Imagina\Payulatam\Model\ClientFactory $clientFactory
+     * @param \Icyd\Payulatam\Model\ClientFactory $clientFactory
      * @param \Magento\Framework\Controller\Result\ForwardFactory $resultForwardFactory
-     * @param \Imagina\Payulatam\Logger\Logger $logger
+     * @param \Icyd\Payulatam\Logger\Logger $logger
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
-        \Imagina\Payulatam\Model\ClientFactory $clientFactory,
+        \Icyd\Payulatam\Model\ClientFactory $clientFactory,
         \Magento\Framework\Controller\Result\ForwardFactory $resultForwardFactory,
-        \Imagina\Payulatam\Logger\Logger $logger
+        \Icyd\Payulatam\Logger\Logger $logger
     ) {
         parent::__construct($context);
         $this->context = $context;
@@ -51,7 +48,7 @@ class Notify extends \Magento\Framework\App\Action\Action
     public function execute()
     {
         /**
-         * @var $client \Imagina\Payulatam\Model\Client
+         * @var $client \Icyd\Payulatam\Model\Client
          */
         $request = $this->context->getRequest();
         try {

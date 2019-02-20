@@ -1,32 +1,29 @@
 <?php
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
 
-namespace Imagina\Payulatam\Block\Payment;
+namespace Icyd\Payulatam\Block\Payment;
 
 class Info extends \Magento\Payment\Block\Info
 {
     /**
-     * @var \Imagina\Payulatam\Model\ResourceModel\Transaction
+     * @var \Icyd\Payulatam\Model\ResourceModel\Transaction
      */
     protected $transactionResource;
 
     /**
-     * @var \Imagina\Payulatam\Model\ClientFactory
+     * @var \Icyd\Payulatam\Model\ClientFactory
      */
     protected $clientFactory;
 
     /**
      * @param \Magento\Framework\View\Element\Template\Context $context
-     * @param \Imagina\Payulatam\Model\ResourceModel\Transaction $transactionResource
-     * @param \Imagina\Payulatam\Model\ClientFactory $clientFactory
+     * @param \Icyd\Payulatam\Model\ResourceModel\Transaction $transactionResource
+     * @param \Icyd\Payulatam\Model\ClientFactory $clientFactory
      * @param array $data
      */
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,
-        \Imagina\Payulatam\Model\ResourceModel\Transaction $transactionResource,
-        \Imagina\Payulatam\Model\ClientFactory $clientFactory,
+        \Icyd\Payulatam\Model\ResourceModel\Transaction $transactionResource,
+        \Icyd\Payulatam\Model\ClientFactory $clientFactory,
         array $data = []
     ) {
         parent::__construct($context, $data);
@@ -43,7 +40,7 @@ class Info extends \Magento\Payment\Block\Info
     protected function _prepareSpecificInformation($transport = null)
     {
         /**
-         * @var $client \Imagina\Payulatam\Model\Client
+         * @var $client \Icyd\Payulatam\Model\Client
          */
         $transport = parent::_prepareSpecificInformation($transport);
         $orderId = $this->getInfo()->getParentId();

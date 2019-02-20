@@ -1,9 +1,6 @@
 <?php
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
 
-namespace Imagina\Payulatam\Controller\Payment;
+namespace Icyd\Payulatam\Controller\Payment;
 
 use Magento\Framework\Exception\LocalizedException;
 
@@ -20,12 +17,12 @@ class End extends \Magento\Framework\App\Action\Action
     protected $checkoutSession;
 
     /**
-     * @var \Imagina\Payulatam\Model\Session
+     * @var \Icyd\Payulatam\Model\Session
      */
     protected $session;
 
     /**
-     * @var \Imagina\Payulatam\Model\ClientFactory
+     * @var \Icyd\Payulatam\Model\ClientFactory
      */
     protected $clientFactory;
 
@@ -35,12 +32,12 @@ class End extends \Magento\Framework\App\Action\Action
     protected $context;
 
     /**
-     * @var \Imagina\Payulatam\Model\Order
+     * @var \Icyd\Payulatam\Model\Order
      */
     protected $orderHelper;
 
     /**
-     * @var \Imagina\Payulatam\Logger\Logger
+     * @var \Icyd\Payulatam\Logger\Logger
      */
     protected $logger;
 
@@ -48,19 +45,19 @@ class End extends \Magento\Framework\App\Action\Action
      * @param \Magento\Framework\App\Action\Context $context
      * @param \Magento\Checkout\Model\Session\SuccessValidator $successValidator
      * @param \Magento\Checkout\Model\Session $checkoutSession
-     * @param \Imagina\Payulatam\Model\Session $session
-     * @param \Imagina\Payulatam\Model\ClientFactory $clientFactory
-     * @param \Imagina\Payulatam\Model\Order $orderHelper
-     * @param \Imagina\Payulatam\Logger\Logger $logger
+     * @param \Icyd\Payulatam\Model\Session $session
+     * @param \Icyd\Payulatam\Model\ClientFactory $clientFactory
+     * @param \Icyd\Payulatam\Model\Order $orderHelper
+     * @param \Icyd\Payulatam\Logger\Logger $logger
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Checkout\Model\Session\SuccessValidator $successValidator,
         \Magento\Checkout\Model\Session $checkoutSession,
-        \Imagina\Payulatam\Model\Session $session,
-        \Imagina\Payulatam\Model\ClientFactory $clientFactory,
-        \Imagina\Payulatam\Model\Order $orderHelper,
-        \Imagina\Payulatam\Logger\Logger $logger
+        \Icyd\Payulatam\Model\Session $session,
+        \Icyd\Payulatam\Model\ClientFactory $clientFactory,
+        \Icyd\Payulatam\Model\Order $orderHelper,
+        \Icyd\Payulatam\Logger\Logger $logger
     ) {
         parent::__construct($context);
         $this->context = $context;
@@ -78,14 +75,15 @@ class End extends \Magento\Framework\App\Action\Action
     public function execute()
     {
         /**
-         * @var $clientOrderHelper \Imagina\Payulatam\Model\Client\OrderInterface
+         * @var $clientOrderHelper \Icyd\Payulatam\Model\Client\OrderInterface
          */
         $resultRedirect = $this->resultRedirectFactory->create();
         $redirectUrl = '/';
         try {
             if ($this->successValidator->isValid()) {
-                $redirectUrl = 'payulatam/payment/error';
-                $this->session->setLastOrderId(null);
+                // $redirectUrl = 'payulatam/payment/error';
+                $redirectUrl = 'checkout/onepage/failure';
+                // $this->session->setLastOrderId(null);
                 $clientOrderHelper = $this->getClientOrderHelper();
                 if ($this->orderHelper->paymentSuccessCheck() && $clientOrderHelper->paymentSuccessCheck()) {
                     $redirectUrl = 'checkout/onepage/success';
@@ -108,7 +106,7 @@ class End extends \Magento\Framework\App\Action\Action
     }
 
     /**
-     * @return \Imagina\Payulatam\Model\Client\OrderInterface
+     * @return \Icyd\Payulatam\Model\Client\OrderInterface
      */
     protected function getClientOrderHelper()
     {

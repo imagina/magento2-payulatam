@@ -1,19 +1,16 @@
 <?php
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
 
-namespace Imagina\Payulatam\Model\Client\Classic\Order;
+namespace Icyd\Payulatam\Model\Client\Webcheckout\Order;
 
 class DataGetter
 {
     /**
-     * @var \Imagina\Payulatam\Model\Order\ExtOrderId
+     * @var \Icyd\Payulatam\Model\Order\ExtOrderId
      */
     protected $extOrderIdHelper;
 
     /**
-     * @var \Imagina\Payulatam\Model\Client\Classic\Config
+     * @var \Icyd\Payulatam\Model\Client\Webcheckout\Config
      */
     protected $configHelper;
 
@@ -23,21 +20,21 @@ class DataGetter
     protected $dateTime;
 
     /**
-     * @var \Imagina\Payulatam\Model\Session
+     * @var \Icyd\Payulatam\Model\Session
      */
     protected $session;
 
     /**
-     * @param \Imagina\Payulatam\Model\Order\ExtOrderId $extOrderIdHelper
-     * @param \Imagina\Payulatam\Model\Client\Classic\Config $configHelper
+     * @param \Icyd\Payulatam\Model\Order\ExtOrderId $extOrderIdHelper
+     * @param \Icyd\Payulatam\Model\Client\Webcheckout\Config $configHelper
      * @param \Magento\Framework\Stdlib\DateTime\DateTime $dateTime
-     * @param \Imagina\Payulatam\Model\Session $session
+     * @param \Icyd\Payulatam\Model\Session $session
      */
     public function __construct(
-        \Imagina\Payulatam\Model\Order\ExtOrderId $extOrderIdHelper,
-        \Imagina\Payulatam\Model\Client\Classic\Config $configHelper,
+        \Icyd\Payulatam\Model\Order\ExtOrderId $extOrderIdHelper,
+        \Icyd\Payulatam\Model\Client\Webcheckout\Config $configHelper,
         \Magento\Framework\Stdlib\DateTime\DateTime $dateTime,
-        \Imagina\Payulatam\Model\Session $session,
+        \Icyd\Payulatam\Model\Session $session,
         \Magento\Store\Model\StoreManagerInterface $storeManager
     ) {
         $this->extOrderIdHelper = $extOrderIdHelper;
@@ -55,6 +52,7 @@ class DataGetter
     {
         $incrementId = $order->getIncrementId();
         $billingAddress = $order->getBillingAddress();
+        $address = $order->getShippingAddress();
 
         $taxReturnBase = number_format(($order->getGrandTotal() - $order->getTaxAmount()),2,'.','');
         if($order->getTaxAmount() == 0) $taxReturnBase = 0;
@@ -63,18 +61,20 @@ class DataGetter
             'amount' => number_format($order->getGrandTotal(),2,'.',''),
             'description' => __('Order # %1', [$incrementId]) . " ",
             'extra1' => $incrementId,
-            'extra2' => 'Imagina_Payulatam_M2',
+            'extra2' => 'Icyd_Payulatam_M2',
             'buyerFullName' => $billingAddress->getFirstname(). ' '.$billingAddress->getLastname(),
             'buyerEmail' => $order->getCustomerEmail(),
             'referenceCode' => $this->extOrderIdHelper->generate($order),
             'currency' => $order->getOrderCurrencyCode(),
             'tax' => number_format($order->getTaxAmount(),2,'.',''),
             'taxReturnBase' => $taxReturnBase,
-            // TODO Contruct url with modules
-            // 'responseUrl' => 'https://dev.palpet.co/payulatam/payment/end',
-            'responseUrl' => $this->storeManager->getstore()->getBaseUrl(),
+            'shippingAddress' => implode(",", $address->getStreet()),
+            'shippingCity' => $address->getCity(),
+            'shippingCountry' => $address->getCountryId(),
+            'mobilePhone' => $billingAddress->getTelephone(),
+            'telephone' => $billingAddress->getTelephone(),
+            'responseUrl' => $this->storeManager->getstore()->getUrl('payulatam/payment/end'),
             'confirmationUrl' => $this->storeManager->getstore()->getUrl('payulatam/payment/notify')
-            // 'confirmationUrl' => 'https://dev.palpet.co/payulatam/payment/notify'
         ];
 
         return $data;
@@ -102,6 +102,14 @@ class DataGetter
     public function getTestMode()
     {
         return $this->configHelper->getConfig('test');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->configHelper->getConfig('country');
     }
 
     /**

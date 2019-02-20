@@ -1,11 +1,8 @@
 <?php
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
 
-namespace Imagina\Payulatam\Model\Client\Classic\Order;
+namespace Icyd\Payulatam\Model\Client\Webcheckout\Order;
 
-class DataValidator extends \Imagina\Payulatam\Model\Client\DataValidator
+class DataValidator extends \Icyd\Payulatam\Model\Client\DataValidator
 {
     /**
      * @var array

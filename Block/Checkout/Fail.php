@@ -1,14 +1,14 @@
 <?php
 /**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
+ * @copyright Copyright (c) 2017 Icyd Colombia (https://www.imaginacolombia.com)
  */
 
-namespace Imagina\Payulatam\Block\Checkout;
+namespace Icyd\Payulatam\Block\Checkout;
 
 class Fail extends \Magento\Checkout\Block\Onepage\Success
 {
     /**
-     * @var \Imagina\Payulatam\Helper\Payment
+     * @var \Icyd\Payulatam\Helper\Payment
      */
     protected $paymentHelper;
 
@@ -17,7 +17,7 @@ class Fail extends \Magento\Checkout\Block\Onepage\Success
         \Magento\Checkout\Model\Session $checkoutSession,
         \Magento\Sales\Model\Order\Config $orderConfig,
         \Magento\Framework\App\Http\Context $httpContext,
-        \Imagina\Payulatam\Helper\Payment $paymentHelper,
+        \Icyd\Payulatam\Helper\Payment $paymentHelper,
         array $data = []
     ) {
         parent::__construct(

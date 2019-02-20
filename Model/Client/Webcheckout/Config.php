@@ -1,14 +1,11 @@
 <?php
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
 
-namespace Imagina\Payulatam\Model\Client\Classic;
+namespace Icyd\Payulatam\Model\Client\Webcheckout;
 
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Phrase;
-use Imagina\Payulatam\Model\Client\ConfigInterface;
-use Imagina\Payulatam\Model\Payulatam;
+use Icyd\Payulatam\Model\Client\ConfigInterface;
+use Icyd\Payulatam\Model\Payulatam;
 
 class Config implements ConfigInterface
 {
@@ -47,6 +44,11 @@ class Config implements ConfigInterface
      * @var string
      */
     protected $url;
+
+    /**
+     * @var string
+     */
+    protected $country;
 
     /**
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
@@ -102,6 +104,13 @@ class Config implements ConfigInterface
             $this->url = 'https://gateway.payulatam.com/ppp-web-gateway/';
         }
 
+        $country = $this->scopeConfig->getValue(Payulatam::XML_PATH_COUNTRY, 'store');
+        if ($country) {
+            $this->country = $country;
+        } else {
+            throw new LocalizedException(new Phrase('country is empty.'));
+        }
+
 
         return true;
     }
@@ -119,6 +128,7 @@ class Config implements ConfigInterface
             'ApiLogin' => $this->ApiLogin,
             'test' => $this->test,
             'url' => $this->url,
+            'country' => $this->country
         ];
         if ($key) {
             return $config[$key];

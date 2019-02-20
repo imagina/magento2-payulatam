@@ -1,22 +1,17 @@
 <?xml version="1.0"?>
-<!--
-/**
-* @copyright Copyright (c) 2017 Imagina. (https://www.imaginacolombia.com)
-*/
--->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
         <payment>
             <payulatam>
                 <active>1</active>
-                <title>Payu Latam</title>
+                <title>PayU Latam</title>
 
                 <order_status_new>pending</order_status_new>
                 <order_status_holded>holded</order_status_holded>
                 <order_status_processing>processing</order_status_processing>
 
-                <model>Imagina\Payulatam\Model\Payulatam</model>
+                <model>Icyd\Payulatam\Model\Payulatam</model>
                 <allowspecific>0</allowspecific>
 
             </payulatam>

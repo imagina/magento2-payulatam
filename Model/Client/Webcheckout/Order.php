@@ -1,35 +1,47 @@
 <?php
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
 
-namespace Imagina\Payulatam\Model\Client\Classic;
+namespace Icyd\Payulatam\Model\Client\Webcheckout;
 
-class Order implements \Imagina\Payulatam\Model\Client\OrderInterface
+class Order implements \Icyd\Payulatam\Model\Client\OrderInterface
 {
+    // TODO
+    // const STATUS_PRE_NEW            = 0;
+    // const STATUS_NEW                = 1;
+    // const STATUS_CANCELLED          = 2;
+    // const STATUS_REJECTED           = 3;
+    // const STATUS_PENDING            = 4;
+    // const STATUS_WAITING            = 5;
+    // const STATUS_REJECTED_CANCELLED = 7;
+    // const STATUS_COMPLETED          = 99;
+    // const STATUS_ERROR              = 888;
     const STATUS_PRE_NEW            = 0;
     const STATUS_NEW                = 1;
-    const STATUS_CANCELLED          = 2;
-    const STATUS_REJECTED           = 3;
-    const STATUS_PENDING            = 4;
-    const STATUS_WAITING            = 5;
-    const STATUS_REJECTED_CANCELLED = 7;
-    const STATUS_COMPLETED          = 99;
-    const STATUS_ERROR              = 888;
-
+    const STATUS_APPROVED           = 4;
+    const STATUS_DECLINED           = 6;
+    const STATUS_ERROR              = 104;
+    const STATUS_EXPIRED            = 5;
+    const STATUS_PENDING            = 7;
     /**
      * @var string[]
      */
     protected $statusDescription = [
+        // TODO
+        // self::STATUS_PRE_NEW => 'New',
+        // self::STATUS_NEW => 'New',
+        // self::STATUS_CANCELLED => 'Cancelled',
+        // self::STATUS_REJECTED => 'Rejected',
+        // self::STATUS_PENDING => 'Pending',
+        // self::STATUS_WAITING => 'Waiting for acceptance',
+        // self::STATUS_REJECTED_CANCELLED => 'Rejected',
+        // self::STATUS_COMPLETED => 'Completed',
+        // self::STATUS_ERROR => 'Error'
         self::STATUS_PRE_NEW => 'New',
         self::STATUS_NEW => 'New',
-        self::STATUS_CANCELLED => 'Cancelled',
-        self::STATUS_REJECTED => 'Rejected',
-        self::STATUS_PENDING => 'Pending',
-        self::STATUS_WAITING => 'Waiting for acceptance',
-        self::STATUS_REJECTED_CANCELLED => 'Rejected',
-        self::STATUS_COMPLETED => 'Completed',
-        self::STATUS_ERROR => 'Error'
+        self::STATUS_APPROVED => 'Approved',
+        self::STATUS_DECLINED => 'Rejected',
+        self::STATUS_ERROR => 'Error',
+        self::STATUS_EXPIRED => 'Expired',
+        self::STATUS_PENDING => 'Pending'
     ];
 
     /**
@@ -48,7 +60,7 @@ class Order implements \Imagina\Payulatam\Model\Client\OrderInterface
     protected $urlBuilder;
 
     /**
-     * @var \Imagina\Payulatam\Model\Session
+     * @var \Icyd\Payulatam\Model\Session
      */
     protected $session;
 
@@ -58,7 +70,7 @@ class Order implements \Imagina\Payulatam\Model\Client\OrderInterface
     protected $request;
 
     /**
-     * @var \Imagina\Payulatam\Logger\Logger
+     * @var \Icyd\Payulatam\Logger\Logger
      */
     protected $logger;
 
@@ -73,7 +85,7 @@ class Order implements \Imagina\Payulatam\Model\Client\OrderInterface
     protected $methodCaller;
 
     /**
-     * @var \Imagina\Payulatam\Model\ResourceModel\Transaction
+     * @var \Icyd\Payulatam\Model\ResourceModel\Transaction
      */
     protected $transactionResource;
 
@@ -91,12 +103,12 @@ class Order implements \Imagina\Payulatam\Model\Client\OrderInterface
      * @param \Magento\Framework\View\Context $context
      * @param Order\DataValidator $dataValidator
      * @param Order\DataGetter $dataGetter
-     * @param \Imagina\Payulatam\Model\Session $session
+     * @param \Icyd\Payulatam\Model\Session $session
      * @param \Magento\Framework\App\RequestInterface $request
-     * @param \Imagina\Payulatam\Logger\Logger $logger
+     * @param \Icyd\Payulatam\Logger\Logger $logger
      * @param Order\Notification $notificationHelper
      * @param MethodCaller $methodCaller
-     * @param \Imagina\Payulatam\Model\ResourceModel\Transaction $transactionResource
+     * @param \Icyd\Payulatam\Model\ResourceModel\Transaction $transactionResource
      * @param Order\Processor $orderProcessor
      * @param \Magento\Framework\Controller\Result\RawFactory $rawResultFactory
      */
@@ -104,12 +116,12 @@ class Order implements \Imagina\Payulatam\Model\Client\OrderInterface
         \Magento\Framework\View\Context $context,
         Order\DataValidator $dataValidator,
         Order\DataGetter $dataGetter,
-        \Imagina\Payulatam\Model\Session $session,
+        \Icyd\Payulatam\Model\Session $session,
         \Magento\Framework\App\RequestInterface $request,
-        \Imagina\Payulatam\Logger\Logger $logger,
+        \Icyd\Payulatam\Logger\Logger $logger,
         Order\Notification $notificationHelper,
         MethodCaller $methodCaller,
-        \Imagina\Payulatam\Model\ResourceModel\Transaction $transactionResource,
+        \Icyd\Payulatam\Model\ResourceModel\Transaction $transactionResource,
         Order\Processor $orderProcessor,
         \Magento\Framework\Controller\Result\RawFactory $rawResultFactory
     ) {
@@ -169,7 +181,7 @@ class Order implements \Imagina\Payulatam\Model\Client\OrderInterface
         return [
             'orderId' => md5($data['referenceCode']),
             'extOrderId' => $data['referenceCode'],
-            'redirectUri' => $this->urlBuilder->getUrl('payulatam/classic/form')
+            'redirectUri' => $this->urlBuilder->getUrl('payulatam/webcheckout/form')
         ];
     }
 
@@ -252,10 +264,10 @@ class Order implements \Imagina\Payulatam\Model\Client\OrderInterface
             $data['signature'] = $this->dataGetter->getSigForOrderCreate($data);
         } else {
             $data['merchantId'] = '508029';
-            // TODO change accountID depending on country
-            $data['accountId'] = '512321';
+            $data['accountId'] = $this->dataGetter->getCountry();
             $data['ApiKey'] = 'pRRXKOl8ikMmt9u';
             $data['ApiLogin'] = '4Vj8eK4rloUd272L48hsrarnUA';
+            $data['test'] = '1';
         }
         return $data;
     }
@@ -270,12 +282,13 @@ class Order implements \Imagina\Payulatam\Model\Client\OrderInterface
 
     /**
      * @inheritDoc
+     * Check if the transaction had error
      */
     public function paymentSuccessCheck()
     {
-        $errorCode = $this->request->getParam('error');
-        if ($errorCode) {
-            $extOrderId = $this->request->getParam('referenceCode');
+        $errorCode = $this->request->getParam('transactionState');
+        if ($errorCode  == Order::STATUS_ERROR) {
+            $extOrderId = $this->request->getParam('lapReferenceCode');
             $this->logger->error('Payment error ' . $errorCode . ' for transaction ' . $extOrderId . '.');
             return false;
         }

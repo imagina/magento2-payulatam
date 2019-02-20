@@ -1,14 +1,11 @@
 <?php
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
 
-namespace Imagina\Payulatam\Controller\Classic;
+namespace Icyd\Payulatam\Controller\Webcheckout;
 
 class Form extends \Magento\Framework\App\Action\Action
 {
     /**
-     * @var \Imagina\Payulatam\Model\Session
+     * @var \Icyd\Payulatam\Model\Session
      */
     protected $session;
 
@@ -19,11 +16,11 @@ class Form extends \Magento\Framework\App\Action\Action
 
     /**
      * @param \Magento\Framework\App\Action\Context $context
-     * @param \Imagina\Payulatam\Model\Session $session
+     * @param \Icyd\Payulatam\Model\Session $session
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
-        \Imagina\Payulatam\Model\Session $session,
+        \Icyd\Payulatam\Model\Session $session,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory
     ) {
         parent::__construct($context);
@@ -46,12 +43,12 @@ class Form extends \Magento\Framework\App\Action\Action
         if ($orderCreateData) {
             //Todo: Reactivate after testing
             //$this->session->setOrderCreateData(null);
-            $resultPage = $this->resultPageFactory->create(true, ['template' => 'Imagina_Payulatam::emptyroot.phtml']);
+            $resultPage = $this->resultPageFactory->create(true, ['template' => 'Icyd_Payulatam::emptyroot.phtml']);
             $resultPage->addHandle($resultPage->getDefaultLayoutHandle());
 
 
-            $resultPage->getLayout()->getBlock('payulatam.classic.form')->setOrderCreateData($orderCreateData);
-            $resultPage->getLayout()->getBlock('payulatam.classic.form')->setGatewayUrl($gatewayUrl);
+            $resultPage->getLayout()->getBlock('payulatam.webcheckout.form')->setOrderCreateData($orderCreateData);
+            $resultPage->getLayout()->getBlock('payulatam.webcheckout.form')->setGatewayUrl($gatewayUrl);
             return $resultPage;
         } else {
             $resultRedirect = $this->resultRedirectFactory->create();

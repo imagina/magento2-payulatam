@@ -1,14 +1,9 @@
 <?xml version="1.0"?>
-<!--
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
--->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="standard">
         <route id="payulatam" frontName="payulatam">
-            <module name="Imagina_Payulatam" />
+            <module name="Icyd_Payulatam" />
         </route>
     </router>
 </config>

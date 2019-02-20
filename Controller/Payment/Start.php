@@ -1,47 +1,44 @@
 <?php
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
 
-namespace Imagina\Payulatam\Controller\Payment;
+namespace Icyd\Payulatam\Controller\Payment;
 
 use Magento\Framework\Exception\LocalizedException;
 
 class Start extends \Magento\Framework\App\Action\Action
 {
     /**
-     * @var \Imagina\Payulatam\Model\ClientFactory
+     * @var \Icyd\Payulatam\Model\ClientFactory
      */
     protected $clientFactory;
 
     /**
-     * @var \Imagina\Payulatam\Model\Order
+     * @var \Icyd\Payulatam\Model\Order
      */
     protected $orderHelper;
 
     /**
-     * @var \Imagina\Payulatam\Model\Session
+     * @var \Icyd\Payulatam\Model\Session
      */
     protected $session;
 
     /**
-     * @var \Imagina\Payulatam\Logger\Logger
+     * @var \Icyd\Payulatam\Logger\Logger
      */
     protected $logger;
 
     /**
      * @param \Magento\Framework\App\Action\Context $context
-     * @param \Imagina\Payulatam\Model\ClientFactory $clientFactory
-     * @param \Imagina\Payulatam\Model\Order $orderHelper
-     * @param \Imagina\Payulatam\Model\Session $session
-     * @param \Imagina\Payulatam\Logger\Logger $logger
+     * @param \Icyd\Payulatam\Model\ClientFactory $clientFactory
+     * @param \Icyd\Payulatam\Model\Order $orderHelper
+     * @param \Icyd\Payulatam\Model\Session $session
+     * @param \Icyd\Payulatam\Logger\Logger $logger
      */
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
-        \Imagina\Payulatam\Model\ClientFactory $clientFactory,
-        \Imagina\Payulatam\Model\Order $orderHelper,
-        \Imagina\Payulatam\Model\Session $session,
-        \Imagina\Payulatam\Logger\Logger $logger
+        \Icyd\Payulatam\Model\ClientFactory $clientFactory,
+        \Icyd\Payulatam\Model\Order $orderHelper,
+        \Icyd\Payulatam\Model\Session $session,
+        \Icyd\Payulatam\Logger\Logger $logger
     ) {
         parent::__construct($context);
         $this->clientFactory = $clientFactory;
@@ -56,7 +53,7 @@ class Start extends \Magento\Framework\App\Action\Action
     public function execute()
     {
         /**
-         * @var $clientOrderHelper \Imagina\Payulatam\Model\Client\OrderInterface
+         * @var $clientOrderHelper \Icyd\Payulatam\Model\Client\OrderInterface
          * @var $resultRedirect \Magento\Framework\Controller\Result\Redirect
          */
         $resultRedirect = $this->resultRedirectFactory->create();
@@ -87,7 +84,8 @@ class Start extends \Magento\Framework\App\Action\Action
                     $this->session->setGatewayUrl($configHelper->getConfig('url'));
 
                     $redirectUrl = $result['redirectUri'];
-                } catch (LocalizedException $e) {
+                   // throw new \Exception("Testing exception.");
+                } catch (LocalizedException | \Exception $e) {
                     $this->logger->critical($e);
                     $redirectUrl = 'payulatam/payment/end';
                     $redirectParams = ['exception' => '1'];

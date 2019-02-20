@@ -1,9 +1,6 @@
 <?php
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
 
-namespace Imagina\Payulatam\Model;
+namespace Icyd\Payulatam\Model;
 
 /**
  * Transaction model

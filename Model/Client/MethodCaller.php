@@ -1,11 +1,8 @@
 <?php
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
 
-namespace Imagina\Payulatam\Model\Client;
+namespace Icyd\Payulatam\Model\Client;
 
-use Imagina\Payulatam\Model\Client\MethodCallerInterface;
+use Icyd\Payulatam\Model\Client\MethodCallerInterface;
 
 class MethodCaller implements MethodCallerInterface
 {
@@ -15,17 +12,17 @@ class MethodCaller implements MethodCallerInterface
     protected $_rawMethod;
 
     /**
-     * @var \Imagina\Payulatam\Logger\Logger
+     * @var \Icyd\Payulatam\Logger\Logger
      */
     protected $_logger;
 
     /**
      * @param MethodCaller\RawInterface $rawMethod
-     * @param \Imagina\Payulatam\Logger\Logger $logger
+     * @param \Icyd\Payulatam\Logger\Logger $logger
      */
     public function __construct(
         MethodCaller\RawInterface $rawMethod,
-        \Imagina\Payulatam\Logger\Logger $logger
+        \Icyd\Payulatam\Logger\Logger $logger
     ) {
         $this->_rawMethod = $rawMethod;
         $this->_logger = $logger;

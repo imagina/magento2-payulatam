@@ -1,14 +1,11 @@
 <?php
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
 
-namespace Imagina\Payulatam\Model\Order;
+namespace Icyd\Payulatam\Model\Order;
 
 class ExtOrderId
 {
     /**
-     * @var \Imagina\Payulatam\Model\ResourceModel\Transaction
+     * @var \Icyd\Payulatam\Model\ResourceModel\Transaction
      */
     protected $transactionResource;
 
@@ -18,11 +15,11 @@ class ExtOrderId
     protected $dateTime;
 
     /**
-     * @param \Imagina\Payulatam\Model\ResourceModel\Transaction $transactionResource
+     * @param \Icyd\Payulatam\Model\ResourceModel\Transaction $transactionResource
      * @param \Magento\Framework\Stdlib\DateTime\DateTime $dateTime
      */
     public function __construct(
-        \Imagina\Payulatam\Model\ResourceModel\Transaction $transactionResource,
+        \Icyd\Payulatam\Model\ResourceModel\Transaction $transactionResource,
         \Magento\Framework\Stdlib\DateTime\DateTime $dateTime
     ) {
         $this->transactionResource = $transactionResource;

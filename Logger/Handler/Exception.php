@@ -1,9 +1,9 @@
 <?php
 /**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
+ * @copyright Copyright (c) 2017 Icyd Colombia (https://www.imaginacolombia.com)
  */
 
-namespace Imagina\Payulatam\Logger\Handler;
+namespace Icyd\Payulatam\Logger\Handler;
 
 use Monolog\Logger;
 
@@ -12,7 +12,7 @@ class Exception extends \Magento\Framework\Logger\Handler\Base
     /**
      * @var string
      */
-    protected $fileName = '/var/log/imagina/payulatam/exception.log';
+    protected $fileName = '/var/log/payulatam/exception.log';
 
     /**
      * @var int

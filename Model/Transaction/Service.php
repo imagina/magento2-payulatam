@@ -1,9 +1,6 @@
 <?php
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
 
-namespace Imagina\Payulatam\Model\Transaction;
+namespace Icyd\Payulatam\Model\Transaction;
 
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Phrase;
@@ -16,17 +13,17 @@ class Service
     protected $transactionRepository;
 
     /**
-     * @var \Imagina\Payulatam\Model\ResourceModel\Transaction
+     * @var \Icyd\Payulatam\Model\ResourceModel\Transaction
      */
     protected $transactionResource;
 
     /**
      * @param \Magento\Sales\Api\TransactionRepositoryInterface $transactionRepository
-     * @param \Imagina\Payulatam\Model\ResourceModel\Transaction $transactionResource
+     * @param \Icyd\Payulatam\Model\ResourceModel\Transaction $transactionResource
      */
     public function __construct(
         \Magento\Sales\Api\TransactionRepositoryInterface $transactionRepository,
-        \Imagina\Payulatam\Model\ResourceModel\Transaction $transactionResource
+        \Icyd\Payulatam\Model\ResourceModel\Transaction $transactionResource
     ) {
         $this->transactionRepository = $transactionRepository;
         $this->transactionResource = $transactionResource;

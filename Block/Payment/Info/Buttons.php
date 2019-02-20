@@ -1,9 +1,9 @@
 <?php
 /**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
+ * @copyright Copyright (c) 2017 Icyd Colombia (https://www.imaginacolombia.com)
  */
 
-namespace Imagina\Payulatam\Block\Payment\Info;
+namespace Icyd\Payulatam\Block\Payment\Info;
 
 class Buttons extends \Magento\Framework\View\Element\Template
 {

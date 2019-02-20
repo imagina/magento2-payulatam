@@ -1,9 +1,6 @@
 <?php
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
 
-namespace Imagina\Payulatam\Controller\Payment;
+namespace Icyd\Payulatam\Controller\Payment;
 
 class Repeat extends \Magento\Framework\App\Action\Action
 {
@@ -13,19 +10,19 @@ class Repeat extends \Magento\Framework\App\Action\Action
     protected $context;
 
     /**
-     * @var \Imagina\Payulatam\Helper\Payment
+     * @var \Icyd\Payulatam\Helper\Payment
      */
     protected $paymentHelper;
 
     /**
-     * @var \Imagina\Payulatam\Model\Session
+     * @var \Icyd\Payulatam\Model\Session
      */
     protected $session;
 
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
-        \Imagina\Payulatam\Helper\Payment $paymentHelper,
-        \Imagina\Payulatam\Model\Session $session
+        \Icyd\Payulatam\Helper\Payment $paymentHelper,
+        \Icyd\Payulatam\Model\Session $session
     ) {
         parent::__construct($context);
         $this->context = $context;

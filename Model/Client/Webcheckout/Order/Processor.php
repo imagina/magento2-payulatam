@@ -1,23 +1,19 @@
 <?php
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
 
-namespace Imagina\Payulatam\Model\Client\Rest\Order;
+namespace Icyd\Payulatam\Model\Client\Webcheckout\Order;
 
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Phrase;
-use \Imagina\Payulatam\Model\Client\Rest\Order;
 
 class Processor
 {
     /**
-     * @var \Imagina\Payulatam\Model\Order\Processor
+     * @var \Icyd\Payulatam\Model\Order\Processor
      */
     protected $orderProcessor;
 
     public function __construct(
-        \Imagina\Payulatam\Model\Order\Processor $orderProcessor
+        \Icyd\Payulatam\Model\Order\Processor $orderProcessor
     ) {
         $this->orderProcessor = $orderProcessor;
     }
@@ -33,20 +29,22 @@ class Processor
     public function processStatusChange($payulatamOrderId, $status = '', $amount = null, $newest = true)
     {
         if (!in_array($status, [
+            Order::STATUS_PRE_NEW,
             Order::STATUS_NEW,
-            Order::STATUS_PENDING,
-            Order::STATUS_CANCELLED,
-            Order::STATUS_REJECTED,
-            Order::STATUS_WAITING,
-            Order::STATUS_COMPLETED
-        ])) {
+            Order::STATUS_APPROVED,
+            Order::STATUS_DECLINED,
+            Order::STATUS_ERROR,
+            Order::STATUS_EXPIRED,
+            Order::STATUS_PENDING
+        ])
+        ) {
             throw new LocalizedException(new Phrase('Invalid status.'));
         }
         if (!$newest) {
             $close = in_array($status, [
-                Order::STATUS_CANCELLED,
-                Order::STATUS_REJECTED,
-                Order::STATUS_COMPLETED
+                Order::STATUS_DECLINED,
+                Order::STATUS_EXPIRED,
+                Order::STATUS_APPROVED
             ]);
             $this->orderProcessor->processOld($payulatamOrderId, $status, $close);
             return true;
@@ -56,14 +54,12 @@ class Processor
             case Order::STATUS_PENDING:
                 $this->orderProcessor->processPending($payulatamOrderId, $status);
                 return true;
-            case Order::STATUS_CANCELLED:
-            case Order::STATUS_REJECTED:
+            case Order::STATUS_DECLINED:
+            case Order::STATUS_EXPIRED:
+            case Order::STATUS_ERROR:
                 $this->orderProcessor->processHolded($payulatamOrderId, $status);
                 return true;
-            case Order::STATUS_WAITING:
-                $this->orderProcessor->processWaiting($payulatamOrderId, $status);
-                return true;
-            case Order::STATUS_COMPLETED:
+            case Order::STATUS_APPROVED:
                 $this->orderProcessor->processCompleted($payulatamOrderId, $status, $amount);
                 return true;
         }

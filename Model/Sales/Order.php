@@ -1,9 +1,6 @@
 <?php
-/**
- * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
- */
 
-namespace Imagina\Payulatam\Model\Sales;
+namespace Icyd\Payulatam\Model\Sales;
 
 class Order extends \Magento\Sales\Model\Order
 {
@@ -14,7 +11,7 @@ class Order extends \Magento\Sales\Model\Order
         \Magento\Framework\Api\AttributeValueFactory $customAttributeFactory,
         \Magento\Framework\Stdlib\DateTime\TimezoneInterface $timezone,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Imagina\Payulatam\Model\Sales\Order\Config $orderConfig,
+        \Icyd\Payulatam\Model\Sales\Order\Config $orderConfig,
         \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
         \Magento\Sales\Model\ResourceModel\Order\Item\CollectionFactory $orderItemCollectionFactory,
         \Magento\Catalog\Model\Product\Visibility $productVisibility,

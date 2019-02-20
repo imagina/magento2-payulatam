@@ -1,5 +1,5 @@
 <?php
-namespace Imagina\Payulatam\Model;
+namespace Icyd\Payulatam\Model;
 
 use Magento\Payment\Model\Method\AbstractMethod;
 
@@ -10,11 +10,12 @@ class Payulatam  extends AbstractMethod
     /*
      * Path of config variables in system.xml
      */
-    const XML_PATH_MERCHANT_ID               = 'payment/payulatam/merchantId';
-    const XML_PATH_ACCOUNT_ID           = 'payment/payulatam/accountId';
-    const XML_PATH_API_KEY              = 'payment/payulatam/ApiKey';
-    const XML_PATH_API_LOGIN       = 'payment/payulatam/ApiLogin';
-    const XML_PATH_TEST       = 'payment/payulatam/test';
+    const XML_PATH_MERCHANT_ID = 'payment/payulatam/merchantId';
+    const XML_PATH_ACCOUNT_ID  = 'payment/payulatam/accountId';
+    const XML_PATH_API_KEY     = 'payment/payulatam/ApiKey';
+    const XML_PATH_API_LOGIN   = 'payment/payulatam/ApiLogin';
+    const XML_PATH_TEST        = 'payment/payulatam/test';
+    const XML_PATH_COUNTRY     = 'payment/payulatam/country';
 
     protected $_isGateway = true;
     protected $_canCapture = true;

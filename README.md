@@ -1,33 +1,29 @@
-# Imagina Magento 2 PayuLatam Module
+# Modulo de Pago de Magento 2 para PayuLatam
 
-*Read this in other languages: [Español](README.es.md),[English](README.md)
+Modulo de integración de PayuLatam para Magento 2
 
-PayuLatam integration for Magento 2
+## Características
+- Webcheckout.
+- Soporte a multi-tienda,
+- Integración Inicial con el flujo de pago de Magento 2 (transaccioness, reintentos, etc.),
+- Registro de acciones, errores, etc
+- Modo de Prueba, con configuración automática según país.
 
-## Key features
-- Webcheckout
-- multi-store support,
-- Initial integration with Magento payment flow (transactions, refunds, etc.),
-- logging all APIs exceptions and errors,
-- test mode
+## Panel de configuración
 
-## Configuration in PayuLatam panel
+Lo puede encontrar en "Stores > Configuration > Sales > Payment Methods > Icyd PayuLatam."
 
-"Return address" should be set to "yourdomain/payulatam/payment/end"
-
-"Report/Confirmation Address" should be set to "yourdomain/payulatam/payment/notify"
-
-
-## Configuration in Magento panel
-
-The configuration can be found in Stores > Configuration > Sales > Payment Methods > Imagina PayuLatam. It should be pretty straight-forward.
-
-## How to Install
-From the command line in magento root:
+## Como instalar
+Desde la línea de comandos en la raíz de magento:
 ```ssh
-composer require imagina/magento2-payulatam
+git clone https://github.com/icyd/magento2-payulatam app/code/Icyd/Payulatam
 php bin/magento setup:upgrade
 php bin/magento setup:di:compile
+php bin/magento cache:flush
+php bin/magento cache:clean
 ```
 
-More Information:  https://www.imaginacolombia.com
+## Atribuciones
+Modulo adaptado del trabajo de [ORBA/magento2-payulatam](https://github.com/ORBA/magento2_payupl) y [Imagina/magento2-payulatam](https://github.com/imagina/magento2-payulatam), bajo licencias [OLS 3.0](https://opensource.org/licenses/OSL-3.0) [AFL 3.0](https://opensource.org/licenses/AFL-3.0) y [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/s). Copyright © 2018 Alberto Vázquez.
+(
+

@@ -1,10 +1,4 @@
 <?xml version="1.0"?>
-<!--
-/**
- * Copyright © 2015 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
--->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="checkout.root">
@@ -23,7 +17,7 @@
                                                             <item name="children" xsi:type="array">
                                                             <!-- merge payment method renders here -->
                                                                 <item name="payulatam-payulatam" xsi:type="array">
-                                                                    <item name="component" xsi:type="string">Imagina_Payulatam/js/view/payment/payulatam</item>
+                                                                    <item name="component" xsi:type="string">Icyd_Payulatam/js/view/payment/payulatam</item>
                                                                     <item name="methods" xsi:type="array">
 																		 <item name="payulatam" xsi:type="array">
                                                                             <item name="isBillingAddressRequired" xsi:type="boolean">true</item>

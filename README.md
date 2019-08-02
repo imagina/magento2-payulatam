@@ -11,13 +11,6 @@ PayuLatam integration for Magento 2
 - logging all APIs exceptions and errors,
 - test mode
 
-## Configuration in PayuLatam panel
-
-"Return address" should be set to "yourdomain/payulatam/payment/end"
-
-"Report/Confirmation Address" should be set to "yourdomain/payulatam/payment/notify"
-
-
 ## Configuration in Magento panel
 
 The configuration can be found in Stores > Configuration > Sales > Payment Methods > Imagina PayuLatam. It should be pretty straight-forward.

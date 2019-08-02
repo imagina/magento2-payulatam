@@ -17,6 +17,7 @@
             <argument name="handlers" xsi:type="array">
                 <item name="exception" xsi:type="object">Imagina\Payulatam\Logger\Handler\Exception</item>
                 <item name="error" xsi:type="object">Imagina\Payulatam\Logger\Handler\Error</item>
+                <item name="info" xsi:type="object">Imagina\Payulatam\Logger\Handler\Info</item>
             </argument>
         </arguments>
     </type>

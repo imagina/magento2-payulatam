@@ -1,0 +1,17 @@
+url: https://github.com/magento2-payulatam
+versions:
+  "0.0.3":
+    Added:
+      - Changelog File
+      - Urls to confirm and response from PayU
+      - Interface to accept Post Requests
+      - Add log info
+      - Fix errors on notify
+      - Msjs to views
+    Changed:
+      - Bug to reedirect payU
+      - Readme.es, Readme.md
+   
+  "0.0.2":
+    Added:
+      - Old version

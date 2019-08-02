@@ -65,6 +65,9 @@ class Start extends \Magento\Framework\App\Action\Action
         $orderId = $this->orderHelper->getOrderIdForPaymentStart();
         if ($orderId) {
             $order = $this->orderHelper->loadOrderById($orderId);
+
+            //echo "<pre>";print_r("Despues order Helper ");die("dead"); // TESTING
+
             if ($this->orderHelper->canStartFirstPayment($order)) {
                 try {
                     $client = $this->clientFactory->create();
@@ -93,6 +96,7 @@ class Start extends \Magento\Framework\App\Action\Action
                     $redirectParams = ['exception' => '1'];
                 }
                 $this->session->setLastOrderId($orderId);
+                
             }
         }
         $resultRedirect->setPath($redirectUrl, $redirectParams);

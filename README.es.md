@@ -12,15 +12,6 @@ Integración PayuLatam para Magento 2
 - Modo de Prueba (Recuerde configurar los parametros de: http://developers.payulatam.com/es/web_checkout/sandbox.html para pruebas sandbox)
 
 
-## Configuración en el panel de PayuLatam
-
-"URL de Respuesta" debe apuntar a "yourdomain/payulatam/payment/end"
-
-"URL de confirmación" debe apuntar a "yourdomain/payulatam/payment/notify"
-
-Reemplace "sudominio" con la direccion de su tienda. Ej. "tienda.com/payulatam/payment/end".
-
-
 ## Configuración en Panel de Magento 2
 
 La configuración puede encontrarse en "Stores > Configuration > Sales > Payment Methods > Imagina PayuLatam."

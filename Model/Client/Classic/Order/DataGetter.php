@@ -57,6 +57,11 @@ class DataGetter
         $taxReturnBase = number_format(($order->getGrandTotal() - $order->getTaxAmount()),2,'.','');
         if($order->getTaxAmount() == 0) $taxReturnBase = 0;
 
+       
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+        $urlBase = $storeManager->getStore()->getBaseUrl();
+
         $data = [
             'amount' => number_format($order->getGrandTotal(),2,'.',''),
             'description' => __('Order # %1', [$incrementId]) . " ",
@@ -68,6 +73,9 @@ class DataGetter
             'currency' => $order->getOrderCurrencyCode(),
             'tax' => number_format($order->getTaxAmount(),2,'.',''),
             'taxReturnBase' => $taxReturnBase,
+            'responseUrl' => $urlBase.'payulatam/payment/end',
+            'confirmationUrl' => $urlBase.'payulatam/payment/notify/',
+            'extra3' => $order->getId()
         ];
 
         return $data;

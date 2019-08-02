@@ -88,7 +88,10 @@ class End extends \Magento\Framework\App\Action\Action
                 $this->session->setLastOrderId(null);
                 $clientOrderHelper = $this->getClientOrderHelper();
                 if ($this->orderHelper->paymentSuccessCheck() && $clientOrderHelper->paymentSuccessCheck()) {
-                    $redirectUrl = 'checkout/onepage/success';
+                    
+                    $request = $this->context->getRequest();
+                    $redirectUrl = $this->addMsjStatus($request);
+
                 }
 
             } else {
@@ -103,6 +106,7 @@ class End extends \Magento\Framework\App\Action\Action
         } catch (LocalizedException $e) {
             $this->logger->critical($e);
         }
+        
         $resultRedirect->setPath($redirectUrl);
         return $resultRedirect;
     }
@@ -114,4 +118,45 @@ class End extends \Magento\Framework\App\Action\Action
     {
         return $this->clientFactory->create()->getOrderHelper();
     }
+
+    /**
+     * @return 
+     */
+    public function addMsjStatus($request){
+
+        $transactionState = $request->getParam('transactionState');
+
+        if ($transactionState == 4 ) {
+            $msj = "Estado de la transaccion: Aprobada";
+            $redirectUrl = 'checkout/onepage/success';
+        }
+
+        else if ($transactionState == 6 ) {
+            $msj = "Estado de la transaccion: Rechazada";
+            $this->messageManager->addError(__($msj)); 
+            $redirectUrl = 'checkout/onepage/failure';
+        }
+
+        else if ($transactionState == 104 ) {
+            $msj = "Estado de la transaccion: Error";
+            $this->messageManager->addError(__($msj));
+            $redirectUrl = 'checkout/onepage/failure';
+        }
+
+        else if ($transactionState == 7 ) {
+            $msj = "Estado de la transaccion: Pendiente";
+            $this->messageManager->addWarning(__($msj));
+            $redirectUrl = 'checkout/onepage/failure';
+        }
+
+        else {
+            $msj = $request->getParam('mensaje');
+            $this->messageManager->addWarning(__($msj));
+            $redirectUrl = 'checkout/onepage/failure';
+        }
+
+        return $redirectUrl;
+
+    }
+
 }
